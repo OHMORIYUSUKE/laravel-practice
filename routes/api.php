@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,6 @@ Route::group(['namespace' => 'Api\V1', 'prefix' => '{apiVersion1}'], function() 
     Route::get('member', [TestController::class, 'api']);
     Route::get('member/{id?}', [TestController::class, 'apiId']);
     Route::post('member', [TestController::class, 'apiPost']);
+    // --------------------------------------------------
+    Route::get('post', [PostController::class, 'postsAll']);
 });
