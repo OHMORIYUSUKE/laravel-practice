@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Log;
+
+//DBファサード
 
 class UserController extends Controller
 {
@@ -13,10 +16,6 @@ class UserController extends Controller
         $name = $request->input('name');
         $refreshToken = $request->input('refreshToken');
         $icon_url = $request->input('icon_url');
-
-        if(!$u_id){
-            return response()->json(['message'=>'error']);
-        }
 
         DB::insert('INSERT INTO user 
                     (u_id, name, refreshToken, icon_url) 
@@ -29,6 +28,17 @@ class UserController extends Controller
             'name' => $name,
             'refreshToken' => $refreshToken,
             'icon_url' => $icon_url,
+         ]);
+    }
+    // ユーザー削除
+    public function deleteUser(Request $request){
+        $u_id = $request->input('u_id');
+        Log::debug(print_r($u_id, true));
+
+        DB::table('user')->where('u_id',$u_id)->delete();
+
+        return response()->json([
+            'u_id' => $u_id,
          ]);
     }
 }
