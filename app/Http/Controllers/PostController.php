@@ -21,4 +21,20 @@ class PostController extends Controller
             JSON_UNESCAPED_SLASHES
         );
     }
+    // JSONのポストを実行
+    public function insertPost(Request $request){
+        $u_id = $request->input('u_id');
+        $content = $request->input('content');
+
+        DB::insert('INSERT INTO post 
+                    (u_id, content) 
+                    values (?, ?)', 
+                    [$u_id,$content]
+                );
+
+        return response()->json([
+            'u_id' => $u_id,
+            'content' => $content,
+         ]);
+    }
 }

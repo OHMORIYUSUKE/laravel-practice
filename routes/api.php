@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,6 @@ Route::group(['namespace' => 'Api\V1', 'prefix' => '{apiVersion1}'], function() 
     Route::post('member', [TestController::class, 'apiPost']);
     // --------------------------------------------------
     Route::get('post', [PostController::class, 'postsAll']);
+    Route::post('post', [PostController::class, 'insertPost']);
+    Route::post('user', [UserController::class, 'insertUser']);
 });
