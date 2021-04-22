@@ -30,15 +30,4 @@ class UserController extends Controller
             'icon_url' => $icon_url,
          ]);
     }
-    // ユーザー削除
-    public function deleteUser(Request $request){
-        $u_id = $request->input('u_id');
-        Log::debug(print_r($u_id, true));
-
-        DB::table('user')->where('u_id',$u_id)->delete();
-
-        return response()->json([
-            'u_id' => $u_id,
-         ]);
-    }
 }
