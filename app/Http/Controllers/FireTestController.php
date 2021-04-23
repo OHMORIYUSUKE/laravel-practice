@@ -18,17 +18,27 @@ class FireTestController extends Controller
 
     public function index(Request $request)
     {
+        
         $idTokenString = $request->input('idToken');
-        $verifiedIdToken = $this->auth->verifyIdToken($idTokenString);
-        $uid = $verifiedIdToken->claims()->get('sub');
+        // try {
+        //     $verifiedIdToken = $this->auth->verifyIdToken($idTokenString);   
+        // }catch (\Exception $e) {
+        //     $verifiedIdToken = $auth->signInWithRefreshToken($refresh_token);
+        // }
+        $verifiedIdToken = $this->auth->signInWithRefreshToken($idTokenString);
+        // $verifiedIdToken->idToken();
+        //$uid = $verifiedIdToken->claims()->get('sub');
 
-        $firebase_user = $this->auth->getUser($uid);
+        //$firebase_user = $this->auth->getUser($uid);
 
-        $this->auth->deleteUser($uid);//<=ユーザー削除
+        //$this->auth->deleteUser($uid);//<=ユーザー削除
+
+        Log::debug(print_r($verifiedIdToken->idToken(), true));
 
         return response()->json([
-            'u_id' => $uid,
-            'name' => $firebase_user->displayName, 
+            // 'u_id' => $uid,
+            // 'name' => $firebase_user->displayName, 
+            $verifiedIdToken,
          ]);
     }
 }
