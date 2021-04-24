@@ -46,23 +46,4 @@ class UserController extends Controller
             'icon_url' => $firebase_user->photoUrl,
         ]);
     }
-    
-    // ユーザー削除
-    public function deleteUser(Request $request){
-        $idToken = $request->input('idToken');
-
-        try {
-            $verifiedIdToken = $this->auth->verifyIdToken($idToken);   
-        }catch (\Exception $e) {
-            return response()->json(['message' => 'Token error'],500);
-        }
-        $uid = $verifiedIdToken->claims()->get('sub');
-
-        $this->auth->disableUser($uid);
-
-        return response()->json([
-            'message' => 'user deleted',
-            'u_id' => $uid,
-        ]);
-    }
 }

@@ -28,5 +28,4 @@ Route::group(['namespace' => 'Api\V1', 'prefix' => '{apiVersion1}'], function() 
     Route::get('post', [PostController::class, 'postsAll']);
     Route::post('post', [PostController::class, 'insertPost']);
     Route::post('user', [UserController::class, 'insertUser']);
-    Route::delete('user', [UserController::class, 'deleteUser']);
 });
