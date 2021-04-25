@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReplyPostController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -27,5 +28,6 @@ Route::pattern('apiVersion1', 'v1');
 Route::group(['namespace' => 'Api\V1', 'prefix' => '{apiVersion1}'], function() {
     Route::get('post', [PostController::class, 'postsAll']);
     Route::post('post', [PostController::class, 'insertPost']);
+    Route::post('post/reply', [ReplyPostController::class, 'insertPost']);
     Route::post('user', [UserController::class, 'insertUser']);
 });
