@@ -32,7 +32,7 @@ class PostController extends Controller
     
     // 投稿を追加する
     public function insertPost(Request $request){
-        $idToken = $request->input('idToken');
+        $idToken = $request->bearerToken();
         $content = $request->input('content');
 
         try {

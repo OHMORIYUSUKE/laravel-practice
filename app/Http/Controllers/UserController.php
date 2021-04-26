@@ -20,12 +20,8 @@ class UserController extends Controller
 
     // ユーザー追加
     public function insertUser(Request $request){
-        $idToken = $request->input('idToken');
-        try {
-            $verifiedIdToken = $this->auth->verifyIdToken($idToken);   
-        }catch (\Exception $e) {
-            return response()->json(['message' => 'Token error'],500);
-        }
+        $idToken = $request->bearerToken();
+        $verifiedIdToken = $this->auth->verifyIdToken($idToken);   
         $uid = $verifiedIdToken->claims()->get('sub');
 
         $firebase_user = $this->auth->getUser($uid);
